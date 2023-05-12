@@ -5,6 +5,10 @@ const router= require('./routes/index')
 const port= process.env.PORT || 1111;
 const app=express();
 
+app.use(express.json());
+app.use(express.urlencoded({
+    extended: true
+}));
 
 app.use('/api', router);
 
