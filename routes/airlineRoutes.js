@@ -13,4 +13,12 @@ router.post(
   }
 );
 
+router.get(
+    "/list",
+    AuthTokenMiddleware.verifyUser,
+    async function (req, res) {
+      return await AirlineControllerInstance.getList(req, res);
+    }
+  );
+
 module.exports = router;

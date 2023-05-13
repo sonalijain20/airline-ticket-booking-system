@@ -7,6 +7,7 @@
 exports.up = async function (knex) {
   await knex.schema.createTable("flights", function (table) {
     table.increments("id").primary();
+    table.string("name", 255);
     table
       .integer("airlineId")
       .unsigned()
@@ -16,7 +17,7 @@ exports.up = async function (knex) {
     table.string("destination", 255);
     table.timestamp("arrivalTime");
     table.timestamp("departureTime");
-    table.integer("TotalSeats").unsigned();
+    table.integer("totalSeats").unsigned();
     table.integer("availableSeats").unsigned();
     table.timestamp("createdAt").defaultTo(knex.fn.now());
   });

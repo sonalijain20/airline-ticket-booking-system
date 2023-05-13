@@ -16,7 +16,6 @@ module.exports = class AuthTokenMiddleware {
         accessToken.replace("Bearer ", ""),
         process.env.JWT_SECRET_KEY
       );
-      console.log(decoded.userInfo);
       req.user = decoded.userInfo;
     } catch (error) {
       return res.status(401).json({
@@ -26,9 +25,9 @@ module.exports = class AuthTokenMiddleware {
     }
   }
 
-  static async verifyPassenger(req, res, next) {
+  static async verifyUser(req, res, next) {
     await AuthTokenMiddleware.decodeToken(req, res);
-    if (req.user.isAdmin) {
+    if (req.params.passengerId && req.params.passengerId != req.user.id) {
       return res.status(403).json({
         statusCode: 403,
         message: "Forbidden",
@@ -39,7 +38,7 @@ module.exports = class AuthTokenMiddleware {
 
   static async verifyAdmin(req, res, next) {
     await AuthTokenMiddleware.decodeToken(req, res);
-    if (!req.user.isAdmin) {
+    if (!req.user?.isAdmin) {
       return res.status(403).json({
         statusCode: 403,
         message: "Forbidden",

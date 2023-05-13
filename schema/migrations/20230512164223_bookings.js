@@ -16,7 +16,7 @@ exports.up = async function (knex) {
       .integer("flightId")
       .unsigned()
       .notNullable()
-      .references("bookings.id");
+      .references("flights.id");
     table.integer("seatNo").unsigned();
     table.timestamp("bookedAt").defaultTo(knex.fn.now());
   });

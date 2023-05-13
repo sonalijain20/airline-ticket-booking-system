@@ -47,7 +47,7 @@ module.exports = class AuthenticateController {
         }
       }
     } catch (err) {
-      console.log("Error happened while registeration: ", err);
+      console.error("Error happened while registeration: ", err);
     }
   }
   validatePayload(payload) {
@@ -153,7 +153,7 @@ module.exports = class AuthenticateController {
         }
       }
     } catch (error) {
-      console.log("Error while login: ", error);
+      console.error("Error while login: ", error);
     }
   }
 
@@ -163,7 +163,7 @@ module.exports = class AuthenticateController {
         expiresIn: "8h",
       });
     } catch (err) {
-      console.log("Error while generating token: ", err);
+      console.error("Error while generating token: ", err);
       return res.status(500).json({
         statusCode: 500,
         message: "Internal Server error",
